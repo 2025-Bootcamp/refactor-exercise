@@ -1,7 +1,6 @@
 package extract;
 
 import java.util.List;
-// extract
 public class OrderProcessor {
 
     public void processOrder(Order order) {
@@ -48,12 +47,12 @@ class Order {
     }
 }
 
-class Item {
+class OrderItem {
     private String name;
     private int quantity;
     private double price;
 
-    public Item(String name, int quantity, double price) {
+    public OrderItem(String name, int quantity, double price) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
