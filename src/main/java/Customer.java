@@ -1,9 +1,19 @@
-public class Customer {
-    String name;
-    Item[] items;
+import java.util.List;
 
-    Customer(String name, Item[] items) {
+class Customer {
+    private String name;
+    private List<Item> items;
+
+    Customer(String name, List<Item> items) {
         this.name = name;
         this.items = items;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

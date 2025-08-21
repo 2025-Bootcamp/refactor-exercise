@@ -1,19 +1,40 @@
-public class InvoicePrinter {
+import java.util.List;
+
+class InvoicePrinter {
+    private static final int BONUS_POINTS = 5;
+
     void printInvoice(Customer customer) {
-        int total = 0;
-        int bonus = 0;
+        printHeader(customer);
 
-        System.out.println("Invoice for " + customer.name);
-        for (Item item : customer.items) {
-            int c = item.p * item.d;
-            System.out.println(item.n + "\t" + item.d + "\t" + item.p + "\t" + c);
+        List<Item> items = customer.getItems();
 
-            total += c;
-            if (item.d > 10) {
-                bonus += 5;
-            }
-        }
+        items.forEach(this::printItem);
 
+        int total = items.stream()
+                .mapToInt(Item::getCost)
+                .sum();
+
+        int bonus = (int) items.stream()
+                .filter(item -> item.getDays() > 10)
+                .count() * BONUS_POINTS;
+
+        printSummary(total, bonus);
+    }
+
+    private void printHeader(Customer customer) {
+        System.out.println("Invoice for " + customer.getName());
+    }
+
+    private void printItem(Item item) {
+        System.out.println(
+                item.getName() + "\t" +
+                        item.getDays() + "\t" +
+                        item.getPrice() + "\t" +
+                        item.getCost()
+        );
+    }
+
+    private void printSummary(int total, int bonus) {
         System.out.println("Total: " + total);
         System.out.println("Bonus: " + bonus);
     }
